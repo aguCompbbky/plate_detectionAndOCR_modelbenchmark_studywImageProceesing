@@ -1,6 +1,6 @@
 # Turkish License Plate Recognition (ANPR) System
 
-![ANPR Pipeline](experiment/presentation/figures/visual_pipeline_demo.png)
+![ANPR Pipeline](experiment/presentation/figures/pipeline_architecture.png)
 
 This repository contains the code, models, and experimental pipeline for the research project: **"The Effect of Image Preprocessing on OCR Models for License Plate Recognition"**.
 
