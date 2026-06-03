@@ -1,0 +1,92 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual env
+venv/
+.env/
+
+# Models
+*.pt
+*.pth
+*.h5
+*.ckpt
+*.onnx
+*.weights
+
+# Data and Datasets
+data/
+dataset/
+datasets/
+database/
+*_new
+*.zip
+*.tar
+*.rar
+evidences/
+crnn_newdata/
+lrp_newdata/
+veri_hazirlama/dataset/
+veri_hazirlama/mixeddataset/
+veri_hazirlama/random_background/
+yolo_train/dataset/
+faster-RCNN_train/dataset/
+experiment/data/
+
+# Text Results and Annotations (Pushing as img instead)
+*.csv
+*.txt
+*.json
+# Keep config or specific json if needed, but per request ignoring text data
+!config.json
+!secrets.json
+
+# Document & Script Ignore Rules
+*.pdf
+*.md
+*.tex
+*.lua
+[Mm]akefile
+Makefile
+fix-longtable.py
+
+# Ignore all images everywhere...
+*.png
+*.jpg
+*.jpeg
+# ...BUT allow images inside the experiment folder
+!experiment/**/*.png
+!experiment/**/*.jpg
+!experiment/**/*.jpeg
+
+# LaTeX temp files
+*.aux
+*.log
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.out
+
+# Logs & outputs
+runs/
+logs/
+outputs/
+
+# Keep result and test image data, so we don't ignore .png/.jpg
+# results/ folder is removed from ignore so result images can be pushed
+# test folders are not ignored
+
+# IDE
+.vscode/
+.idea/
+
+# Secrets
+.env
+*.env
+config.json
+secrets.json
+
+# OS
+.DS_Store
+Thumbs.db
