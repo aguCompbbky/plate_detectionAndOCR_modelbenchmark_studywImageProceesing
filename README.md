@@ -26,6 +26,85 @@ A standard ANPR pipeline consists of plate localization followed by OCR. This st
 - `veri_hazirlama/` - Data preprocessing, cleaning, and formatting scripts.
 - `experiment/` - End-to-end evaluation orchestration, presentation generation, and final figures/plots.
 - `final_report.md` - The comprehensive academic report detailing the methodology, results, and literature review.
+## 🛠️ Execution & Testing Guide
+
+This section explains how to train the individual model components, run evaluations, and execute the end-to-end ANPR experiment pipeline.
+
+### 📦 Prerequisites & Setup
+
+Before running the scripts, make sure you have the required dependencies installed (including PyTorch, Torchvision, OpenCV, Ultralytics, and PaddleOCR):
+```bash
+pip install torch torchvision opencv-python ultralytics paddleocr matplotlib seaborn scikit-learn tqdm
+```
+
+---
+
+### 🏋️‍♂️ Training the Models
+
+You can train the license plate detectors and OCR engines independently. The training scripts default to running K-Fold cross-validation across multiple seeds.
+
+#### 1. Plate Detectors
+* **YOLOv8 Detector:**
+  ```bash
+  cd yolo_train
+  python train/train_yolo8.py
+  ```
+* **Faster R-CNN Detector:**
+  ```bash
+  cd faster-RCNN_train
+  python train/train_frcnn.py
+  ```
+
+#### 2. OCR Models
+* **LPRNet (Custom):**
+  ```bash
+  cd LPRNet_train
+  python train/train.py
+  ```
+* **CRNN (Custom):**
+  ```bash
+  cd CRNN_train
+  python train/train.py
+  ```
+  *(To run a quick 1-epoch smoke test for CRNN, run: `python train/train.py --smoke`)*
+
+---
+
+### 🧪 Evaluation & Testing
+
+You can evaluate the models on test datasets or run the full end-to-end ANPR pipeline.
+
+#### 1. Testing Plate Detectors
+* **YOLOv8 Detector Test:** Run detection on test vehicle images and visualize/save results under `test_results/`:
+  ```bash
+  cd yolo_train
+  python test/test_yolo8.py
+  ```
+
+#### 2. Evaluating OCR Models
+* **CRNN Independent Evaluation:** Test a specific trained checkpoint (by seed and fold combination):
+  ```bash
+  cd CRNN_train
+  python train/evaluate.py --seed 42 --fold 0
+  ```
+
+#### 3. End-to-End Orchestrated Pipeline (Main Experiment)
+The orchestrator script handles detector-OCR pairing, CLAHE + NLM preprocessing, validation, benchmarking, and figures generation.
+```bash
+cd experiment
+
+# List all available pipeline configurations
+python run_pipeline.py --list
+
+# Run a single pipeline (e.g., YOLOv8 Detector + LPRNet OCR)
+python run_pipeline.py --detector yolo --ocr lprnet
+
+# Run all 6 pipeline combinations (YOLO/RCNN x CRNN/LPRNet/Paddle)
+python run_pipeline.py --all
+
+# Recompute benchmarks and regenerate figures using existing results
+python run_pipeline.py --benchmark-only
+```
 
 ## ⚙️ Preprocessing Pipeline
 
