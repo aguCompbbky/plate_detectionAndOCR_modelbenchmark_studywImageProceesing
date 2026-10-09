@@ -134,4 +134,3 @@ Tested on a real-world set of 40 images with full detector-OCR pipelines:
 ## 👤 Author
 **Mustafa Uğur Karaköse**  
 Department of Computer Engineering  
-*Image Processing Final Report 2026*
